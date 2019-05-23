@@ -152,6 +152,141 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-my-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/23/my-first-blog/">Linux常用命令</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/23/my-first-blog/" class="archive-article-date">
+  	<time datetime="2019-05-23T09:14:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a> 
+<h5 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -an | grep 21            # 查看21端口是否被监听</span><br><span class="line">netstat -ntpl | grep vsftpd      # 命令查看到系统现在监听的vsftpd的端口为 21</span><br></pre></td></tr></table></figure>
+<h5 id="firewall-cmd-防火墙命令"><a href="#firewall-cmd-防火墙命令" class="headerlink" title="firewall-cmd 防火墙命令"></a>firewall-cmd 防火墙命令</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld                      # 启动防火墙服务</span><br><span class="line">firewall-cmd --add-service=ftp                 # 暂时开放ftp服务</span><br><span class="line">firewall-cmd --add-service=ftp --permanent     # 永久开放ftp服務</span><br><span class="line">firewall-cmd --remove-service=ftp --permanent  # 永久关闭ftp服務</span><br><span class="line">systemctl restart firewalld                    # 重启firewalld服务</span><br><span class="line">firewall-cmd --reload                          # 重载配置文件</span><br><span class="line">firewall-cmd --get-service                     # 获取所有支持的服务</span><br><span class="line">firewall-cmd --query-service ftp               # 查看服务的启动状态</span><br><span class="line">firewall-cmd --list-all                        # 显示防火墙应用列表</span><br><span class="line">firewall-cmd --add-port=8001/tcp               # 添加自定义的开放端口</span><br><span class="line">firewall-cmd --zone=public --add-port=21/tcp --permanent    # 开放端口，永久</span><br><span class="line">firewall-cmd --zone=public --add-port=8080-8081/tcp         # 开放端口，临时</span><br><span class="line">firewall-cmd --zone=public --remove-port=21/tcp --permanent # 删除端口</span><br><span class="line">iptables -L -n | grep 21                       # 查看设定是否生效</span><br><span class="line">firewall-cmd --state                           # 检测防火墙状态</span><br><span class="line">firewall-cmd --permanent --list-port           # 查看端口列表</span><br></pre></td></tr></table></figure>
+<h5 id="rm-文件-文件夹-删除"><a href="#rm-文件-文件夹-删除" class="headerlink" title="rm 文件/文件夹/删除"></a>rm 文件/文件夹/删除</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">touch aa.txt      # 新增文件</span><br><span class="line">rm aa.txt         # 删除文件</span><br><span class="line">mkdir aa          # 新增文件夹</span><br><span class="line">rmdir aa          # 删除文件夹</span><br><span class="line">rm -rf aa         # 删除非空文件夹（强制删除）</span><br><span class="line">rm -rf ./*        # 删除当前目录下所有文件</span><br><span class="line">du -sh aa.txt     # 查看文件大小</span><br><span class="line">: &gt; aa.txt        # 清空文件内容</span><br><span class="line">true &gt; aa.txt     # 清空文件内容</span><br></pre></td></tr></table></figure>
+<h5 id="mv-移动，重命名"><a href="#mv-移动，重命名" class="headerlink" title="mv 移动，重命名"></a>mv 移动，重命名</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv a.txt b.txt</span><br><span class="line">mv a.txt /home/b.txt</span><br></pre></td></tr></table></figure>
+<h5 id="通过xshell-登录ftp-上传下载文件"><a href="#通过xshell-登录ftp-上传下载文件" class="headerlink" title="通过xshell 登录ftp 上传下载文件"></a>通过xshell 登录ftp 上传下载文件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>             <span class="comment"># 查看当前目录</span></span><br><span class="line">put F:\abc.txt  <span class="comment"># 上传到ftp</span></span><br><span class="line">get a.txt       <span class="comment"># 下载到xshell</span></span><br><span class="line">quit            <span class="comment"># 退出登录，查看当前目录</span></span><br></pre></td></tr></table></figure>
+<h5 id="cd-目录切换"><a href="#cd-目录切换" class="headerlink" title="cd 目录切换"></a>cd 目录切换</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">~              # root 目录</span><br><span class="line">/              # 根目录</span><br><span class="line">pwd            # 显示当前所在目录</span><br><span class="line">ls             # 查看文件和目录</span><br><span class="line">ll             # 查看文件和目录详情</span><br><span class="line">cd usr         # 切换到 usr 目录</span><br><span class="line">cd ..          # 切换到上一层目录</span><br><span class="line">cd /           # 切换到根目录</span><br><span class="line">cd ~           # 切换到 root 目录</span><br><span class="line">cd -           # 返回</span><br></pre></td></tr></table></figure>
+<h5 id="scp-服务器之间复制"><a href="#scp-服务器之间复制" class="headerlink" title="scp 服务器之间复制"></a>scp 服务器之间复制</h5><p>我又两台 Centos 机器，一台192.168.0.100；另一台192.168.0.101 现在在将192.168.0.100上的一个文件复制到192.168.0.101。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scp /home/abc.txt 192.168.1.2:/home/</span><br><span class="line"><span class="comment"># 然后输入192.168.0.101的密码就可以了</span></span><br><span class="line"><span class="comment"># 在追加到 cbd.txt 文件</span></span><br><span class="line">cat /home/abc.txt &gt;&gt; /home/cbd.txt</span><br></pre></td></tr></table></figure>
+<h5 id="grep-搜索"><a href="#grep-搜索" class="headerlink" title="grep 搜索"></a>grep 搜索</h5><blockquote>
+<p><strong>grep</strong>（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来 </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-a 不要忽略二进制数据。</span><br><span class="line">-A&lt;显示列数&gt; 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</span><br><span class="line">-b 在显示符合范本样式的那一行之外，并显示该行之前的内容。</span><br><span class="line">-c 计算符合范本样式的列数。</span><br><span class="line">-C&lt;显示列数&gt;或-&lt;显示列数&gt;  除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</span><br><span class="line">-d&lt;进行动作&gt; 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作。</span><br><span class="line">-e&lt;范本样式&gt; 指定字符串作为查找文件内容的范本样式。</span><br><span class="line">-E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</span><br><span class="line">-f&lt;范本文件&gt; 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式。</span><br><span class="line">-F 将范本样式视为固定字符串的列表。</span><br><span class="line">-G 将范本样式视为普通的表示法来使用。</span><br><span class="line">-h 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</span><br><span class="line">-H 在显示符合范本样式的那一列之前，标示该列的文件名称。</span><br><span class="line">-i 忽略字符大小写的差别。</span><br><span class="line">-l 列出文件内容符合指定的范本样式的文件名称。</span><br><span class="line">-L 列出文件内容不符合指定的范本样式的文件名称。</span><br><span class="line">-n 在显示符合范本样式的那一列之前，标示出该列的编号。</span><br><span class="line">-q 不显示任何信息。</span><br><span class="line">-R/-r 此参数的效果和指定“-d recurse”参数相同。递归查找</span><br><span class="line">-s 不显示错误信息。</span><br><span class="line">-v 反转查找。</span><br><span class="line">-w 只显示全字符合的列。</span><br><span class="line">-x 只显示全列符合的列。</span><br><span class="line">-y 此参数效果跟“-i”相同。</span><br><span class="line">-o 只输出文件中匹配到的部分。</span><br></pre></td></tr></table></figure>
+<p>文件中查找–行号:内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n <span class="string">"bc"</span> /root/shared/fileName.txt --color=auto</span><br></pre></td></tr></table></figure>
+<p>多个文件查找–行号:内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n <span class="string">"bc"</span> /root/shared/fileName.txt /root/shared/fileName2.txt --color=auto</span><br></pre></td></tr></table></figure>
+<p>多个文件查找–文件名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -l <span class="string">"bc"</span> /root/shared/fileName.txt /root/shared/fileName2.txt --color=auto</span><br></pre></td></tr></table></figure>
+<p>递归搜索</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .表示当前目录</span></span><br><span class="line">grep -rn <span class="string">"bc"</span> . --color=auto</span><br><span class="line"><span class="comment"># /表示根目录</span></span><br><span class="line">grep -rn <span class="string">"bc"</span> / --color=auto</span><br><span class="line"><span class="comment"># 指定目录</span></span><br><span class="line">grep -rn <span class="string">"bc"</span> /root --color=auto</span><br></pre></td></tr></table></figure>
+<h5 id="重启关机"><a href="#重启关机" class="headerlink" title="重启关机"></a>重启关机</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Linux centos重启命令：</span><br><span class="line">　　1、reboot</span><br><span class="line">　　2、shutdown -r now 立刻重启(root用户使用)</span><br><span class="line">　　3、shutdown -r 10 过10分钟自动重启(root用户使用)</span><br><span class="line">　　4、shutdown -r 20:35 在时间为20:35时候重启(root用户使用)</span><br><span class="line">　　如果是通过shutdown命令设置重启的话，可以用shutdown -c命令取消重启</span><br><span class="line">Linux centos关机命令：</span><br><span class="line">　　1、halt 立刻关机</span><br><span class="line">　　2、poweroff 立刻关机</span><br><span class="line">　　3、shutdown -h now 立刻关机(root用户使用)</span><br><span class="line">　　4、shutdown -h 10 10分钟后自动关机</span><br></pre></td></tr></table></figure>
+<h5 id="ps-进程"><a href="#ps-进程" class="headerlink" title="ps 进程"></a>ps 进程</h5><p>进程的几种状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">R   <span class="comment"># 正在运行或在运行队列中等待</span></span><br><span class="line">S   <span class="comment"># 睡眠、休眠中， 进程在等待事件的完成</span></span><br><span class="line">D   <span class="comment"># 不可中断睡眠状态，进程通常会等待IO的结束</span></span><br><span class="line">Z   <span class="comment"># 进程已经终止，但进程的描述符存在，直到父进程调用wait或waitpid系统调用后释放</span></span><br><span class="line">T   <span class="comment"># 停止状态，进程收到SIGSTOP,SIGSTP,SIGTIN,SIGTOU信号停止运行</span></span><br><span class="line">W   <span class="comment"># 无驻留页</span></span><br><span class="line">&lt;   <span class="comment"># 高优先级进程</span></span><br><span class="line">N   <span class="comment"># 低优先级进程</span></span><br><span class="line">L   <span class="comment"># 内存锁页</span></span><br></pre></td></tr></table></figure>
+<p>查询进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep java       <span class="comment"># 查询具体进程</span></span><br><span class="line">ps -A                     <span class="comment"># 显示所有进程</span></span><br><span class="line">ps -axjf                  <span class="comment"># 程序数，子父关系</span></span><br></pre></td></tr></table></figure>
+<p>常用参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-A   <span class="comment"># 列出所有进程 </span></span><br><span class="line">-w   <span class="comment"># 显示加宽可以显示较多的资讯 </span></span><br><span class="line">-au  <span class="comment"># 显示较详细的资讯 </span></span><br><span class="line">-aux <span class="comment"># 显示所有包含其他使用者的行程</span></span><br><span class="line">-l   <span class="comment"># 长格式输出 </span></span><br><span class="line">-u   <span class="comment"># 按用户名和启动时间的顺序来显示进程 </span></span><br><span class="line">-j   <span class="comment"># 用任务格式显示进程 </span></span><br><span class="line">-f   <span class="comment"># 用树形格式显示进程 </span></span><br><span class="line">-a   <span class="comment"># 显示所有用户的所有进程 </span></span><br><span class="line">-x   <span class="comment"># 显示无控制终端的进程 </span></span><br><span class="line">-r   <span class="comment"># 显示运行中的进程 </span></span><br><span class="line">-ww  <span class="comment"># 避免详细参数被截断</span></span><br></pre></td></tr></table></figure>
+<h5 id="wget-下载"><a href="#wget-下载" class="headerlink" title="wget 下载"></a>wget 下载</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载到指定目录，默认当前目录</span></span><br><span class="line">wget -P /root 网址</span><br></pre></td></tr></table></figure>
+<h5 id="tail-监控文件内容变化-tail-f-filename"><a href="#tail-监控文件内容变化-tail-f-filename" class="headerlink" title="tail 监控文件内容变化(tail -f filename)"></a>tail 监控文件内容变化(tail -f filename)</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-f 循环读取</span><br><span class="line">-q 不显示处理信息</span><br><span class="line">-v 显示详细的处理信息</span><br><span class="line">-c&lt;数目&gt; 显示的字节数</span><br><span class="line">-n&lt;行数&gt; 显示行数</span><br><span class="line">--pid=PID 与-f合用,表示在进程ID,PID死掉之后结束. </span><br><span class="line">-q, --quiet, --silent 从不输出给出文件名的首部 </span><br><span class="line">-s, --sleep-interval=S 与-f合用,表示在每次反复的间隔休眠S秒</span><br></pre></td></tr></table></figure>
+<h5 id="rz-sz-上传下载"><a href="#rz-sz-上传下载" class="headerlink" title="rz/sz 上传下载"></a>rz/sz 上传下载</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发送文件到本地</span></span><br><span class="line">sz filename</span><br><span class="line"><span class="comment"># 发送文件到服务器</span></span><br><span class="line">rz</span><br></pre></td></tr></table></figure>
+<h5 id="tar-压缩-解压"><a href="#tar-压缩-解压" class="headerlink" title="tar 压缩/解压"></a>tar 压缩/解压</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf /root/abc.zip /root/abc/</span><br><span class="line">tar -zxvf /root/abc.zip /root/abc/</span><br></pre></td></tr></table></figure>
+<h5 id="zip-压缩-解压"><a href="#zip-压缩-解压" class="headerlink" title="zip 压缩/解压"></a>zip 压缩/解压</h5><ol>
+<li><p>压缩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩服务器上当前目录的内容为xxx.zip文件，－r表示递归压缩子目录下所有文件</span></span><br><span class="line">zip -r xxx.zip ./*</span><br><span class="line"><span class="comment"># 把 file1、file2、 file3、以及 /usr/work/school 目录的内容（假设这个目录存在）压缩起来，然后放入 filename.zip 文件中</span></span><br><span class="line">zip -r filename.zip file1 file2 file3 /usr/work/school</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解压zip文件到当前目录</span></span><br><span class="line">unzip filename.zip</span><br><span class="line"><span class="comment"># 把myfile.zip文件解压到 /home/sunny/</span></span><br><span class="line">unzip -o -d /home/sunny myfile.zip</span><br><span class="line">	-o:不提示的情况下覆盖文件</span><br><span class="line">	-d:-d /home/sunny 指明将文件解压缩到/home/sunny目录下</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加/删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 向压缩文件中myfile.zip中添加rpm_info.txt文件</span></span><br><span class="line">zip -m myfile.zip ./rpm_info.txt</span><br><span class="line"><span class="comment"># 删除压缩文件中smart.txt文件</span></span><br><span class="line">zip -d myfile.zip smart.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tag1</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tag2</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tag3</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/默认分类//" class="article-tag-list-link color5">默认分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/23/my-first-blog/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -173,15 +308,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        
+          <a class="article-more-a" href="/2019/05/23/hello-world/#more">more >></a>
+        
       
 
       
@@ -314,6 +443,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tag1</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tag2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tag3</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
